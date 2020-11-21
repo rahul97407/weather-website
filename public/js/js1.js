@@ -1,0 +1,24 @@
+console.log('hello,new console.');
+const form=document.querySelector('form');
+const address=document.querySelector('input');
+var p_1=document.querySelector('#p-1');
+var p_2=document.querySelector('#p-2');
+var p_3=document.querySelector('#p-3');
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const url='http://localhost:3000/weather?address='+address.value;
+    fetch(url).then((response)=>{
+        response.json().then((data)=>{
+           if(data.error)
+           {console.log('jj')}
+           else 
+           {
+               p_1.textContent='Location: '+address.value;
+               p_2.textContent='Temperature: '+data.temperature;
+               p_3.textContent='Description: '+data.description;
+           }
+        });
+   });
+   
+    
+})
