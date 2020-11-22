@@ -2,6 +2,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const port=process.env.PORT;
 const request = require('request');
 const geocode = require('./utils.js');
 const static_dir = path.join(__dirname, '../public');
@@ -62,7 +63,7 @@ app.get('*', (req, res) => {
     });
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('server started');
 });
 

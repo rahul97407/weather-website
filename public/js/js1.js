@@ -6,7 +6,7 @@ var p_2=document.querySelector('#p-2');
 var p_3=document.querySelector('#p-3');
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
-    const url='http://localhost:3000/weather?address='+address.value;
+    const url='/weather?address='+address.value;
     fetch(url).then((response)=>{
         response.json().then((data)=>{
            if(data.error)
