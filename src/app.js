@@ -2,7 +2,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const port=process.env.PORT;
+const port=process.env.PORT || 3000;
 const request = require('request');
 const geocode = require('./utils.js');
 const static_dir = path.join(__dirname, '../public');
@@ -33,14 +33,16 @@ app.get('/about', (req, res) => {
 })
 app.get('/weather', (req, res) => {
 
-    if (!req.query.address) {
-        return res.send({
-            error: 'please provide a valid address'
-        });
-    }
-    geocode(req.query.address, (temperature, description) => {
+    if(!req.query.address)
+    res.send('plz provide address');
+    else
+    geocode(req.query.address, (error,temperature, description) => {
 
+        if(error)
+        {res.send({status:0})}
+        else
         res.send({
+            status:1,
             temperature: temperature + ' degree celcius',
             address: req.query.address,
             description: description
